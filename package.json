@@ -1,0 +1,16 @@
+{
+  "name": "tutorial-crash-course",
+  "version": "1.0.0",
+  "description": "",
+  "main": "sketch.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/dat.gui": "^0.7.7",
+    "@types/three": "^0.146.0"
+  }
+}
