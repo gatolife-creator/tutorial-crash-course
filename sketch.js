@@ -1,3 +1,5 @@
+import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.121.1/examples/jsm/controls/OrbitControls.js';
+
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(
   75,
@@ -26,7 +28,7 @@ function generateGeometry() {
     world.plane.width,
     world.plane.height,
     world.plane.widthSegments,
-    world.plane.heightSegments 
+    world.plane.heightSegments
   );
 
   const { array } = planeMesh.geometry.attributes.position;
@@ -44,6 +46,7 @@ renderer.setSize(innerWidth, innerHeight);
 renderer.setPixelRatio(devicePixelRatio);
 
 document.body.appendChild(renderer.domElement);
+new OrbitControls(camera, renderer.domElement);
 
 camera.position.z = 5;
 
@@ -70,10 +73,26 @@ const light = new THREE.DirectionalLight(0xffffff, 1);
 light.position.set(0, 0, 1);
 scene.add(light);
 
+const backLight = new THREE.DirectionalLight(0xffffff, 1);
+backLight.position.set(0, 0, -1);
+scene.add(backLight);
+
 function animate() {
   requestAnimationFrame(animate);
   renderer.render(scene, camera);
-  planeMesh.rotation.x += 0.01;
+  // planeMesh.rotation.x += 0.01;
 }
 
 animate();
+
+const mouse = {
+  x: undefined,
+  y: undefined,
+}
+
+addEventListener("mousemove", (e) => {
+  mouse.x = (e.clientX / innerWidth) * 2 - 1;
+  mouse.y = -(e.clientY / innerHeight) * 2 + 1;
+
+  console.log(mouse);
+})
